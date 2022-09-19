@@ -8,15 +8,10 @@ function Validator(options) {
     var errorElement = inputElement.parentElement.querySelector(
       options.errorSelector
     );
-    var errorMessage;
-    // lay cac rules cua selector
-    var rules = selectorRules[rule.selector];
-    // lap qua tung rule va kiem tra
-    // neu co loi thi dung viec kiem tra
-    for (var i = 0; i < rules.length; i++) {
-      errorMessage = rules[i](inputElement.value);
-      if (errorMessage) break;
-    }
+    var errorMessage = rule.test(inputElement.value);
+
+   var rules = selectorRules[rule.selector]
+   console.log(rules)
 
     if (errorMessage) {
       errorElement.innerText = errorMessage;

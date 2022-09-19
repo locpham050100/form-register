@@ -11,8 +11,7 @@ function Validator(options) {
     var errorMessage;
     // lay cac rules cua selector
     var rules = selectorRules[rule.selector];
-    // lap qua tung rule va kiem tra
-    // neu co loi thi dung viec kiem tra
+
     for (var i = 0; i < rules.length; i++) {
       errorMessage = rules[i](inputElement.value);
       if (errorMessage) break;

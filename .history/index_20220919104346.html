@@ -72,25 +72,14 @@
 
     <script src="./assets/script/script.js"></script>
     <script>
-      // mong muon
-      Validator({
-        form: "#form-1",
-        errorSelector: ".form-message",
-        rules: [
-          Validator.isRequired("#fullname"),
-          Validator.isRequired("#email"),
-          Validator.isEmail("#email"),
-          Validator.minLenght("#password", 6),
-          Validator.isRequired("#password_confirmation"),
-          Validator.isConfirmed(
-            "#password_confirmation",
-            function () {
-              return document.querySelector("#form-1 #password").value;
-            },
-            "Mật khẩu nhập lại chưa chính xác"
-          ),
-        ],
-      });
+        // mong muon 
+        Validator ({
+            form: '#from-1',
+            rules: [
+                Validator.isRequired('#fullname'),
+                Validator.isEmail('#email'),
+            ]
+        })
     </script>
   </body>
 </html>

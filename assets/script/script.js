@@ -25,8 +25,43 @@ function Validator(options) {
       errorElement.innerText = "";
       inputElement.parentElement.classList.remove("invalid");
     }
+    return !errorMessage;
   }
   if (formElement) {
+    formElement.onsubmit = function (e) {
+      e.preventDefault();
+
+      var isFormValid = true;
+
+      // thuc hien lap qua tung rule va validate
+      options.rules.forEach(function (rule) {
+        var inputElement = formElement.querySelector(rule.selector);
+        var isValid = validate(inputElement, rule);
+        if (!isValid) {
+          isFormValid = false;
+        }
+      });
+
+      if (isFormValid) {
+        // truong hop submit voi js
+        if (typeof options.onSubmit === "function") {
+          var enableInputs = formElement.querySelectorAll("[name]");
+          var formValues = Array.from(enableInputs).reduce(function (
+            values,
+            input
+          ) {
+            return (values[input.name] = input.value) && values;
+          },
+          {});
+          options.onSubmit(formValues);
+        }
+        // truong hop submit voi mac dinh
+        else {
+          formElement.submit();
+        }
+      }
+    };
+    // lap qua moi rule va xu ly ( lang nghe su kien blur, input,.. )
     options.rules.forEach(function (rule) {
       // luu lai cac rules cho moi input
       if (Array.isArray(selectorRules[rule.selector])) {
@@ -52,7 +87,6 @@ function Validator(options) {
         };
       }
     });
-    console.log(selectorRules);
   }
 }
 // dinh nghia rules

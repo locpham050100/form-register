@@ -66,6 +66,54 @@
           <span class="form-message"></span>
         </div>
 
+        <div class="form-group">
+          <label for="province" class="form-label">Tỉnh / Thành phố</label>
+          <select id="province" name="provice" class="form-control">
+            <option value="">-- Chọn Tỉnh / Thành phố --</option>
+            <option value="hni">Hà Nội</option>
+            <option value="hpg">Hải Phòng</option>
+            <option value="hcm">Hồ Chí Minh</option>
+          </select>
+          <span class="form-message"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="avatar" class="form-label">Ảnh đại diện</label>
+          <div>
+            <input id="avatar" name="avatar" type="file" class="form-control" />
+          </div>
+          <span class="form-message"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="" class="form-label">Giới tính</label>
+          <div>
+            <input
+              value="male"
+              name="gender"
+              type="radio"
+              class="form-control"
+            />Nam
+          </div>
+          <div>
+            <input
+              value="female"
+              name="gender"
+              type="radio"
+              class="form-control"
+            />Nữ
+          </div>
+          <div>
+            <input
+              value="other"
+              name="gender"
+              type="radio"
+              class="form-control"
+            />Khác
+          </div>
+          <span class="form-message"></span>
+        </div>
+
         <button class="form-submit">Đăng ký</button>
       </form>
     </div>
@@ -75,12 +123,16 @@
       // mong muon
       Validator({
         form: "#form-1",
+        formGroupSelector: ".form-group",
         errorSelector: ".form-message",
         rules: [
           Validator.isRequired("#fullname"),
           Validator.isRequired("#email"),
           Validator.isEmail("#email"),
           Validator.minLenght("#password", 6),
+          Validator.isRequired('input[name="gender"]'),
+          Validator.isRequired("#avatar"),
+          Validator.isRequired("#province"),
           Validator.isRequired("#password_confirmation"),
           Validator.isConfirmed(
             "#password_confirmation",
@@ -92,8 +144,8 @@
         ],
         onSubmit: function (data) {
           // call API
-          console.log(data)
-        }
+          console.log(data);
+        },
       });
     </script>
   </body>
